@@ -4,10 +4,11 @@ import logging
 import re
 
 
-def filter_datum(fields, redaction, message, separator):
+def filter_datum(fields: list[str], redaction: str, message: str, separator: str) -> str:
     """returns the log message obfuscated"""
     regex = f'({separator}|^)({"|".join(fields)}=.+?)(?={separator}|$)'
     return re.sub(regex, f'\\1{redaction}', message)
+
 
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
