@@ -49,6 +49,7 @@ def get_logger() -> logging.Logger:
     logger.addHandler(stream_handler)
     return logger
 
+
 def get_db() -> mysql.connector.connection.MySQLConnection:
     """returns a connector to the database"""
     connector = mysql.connector.connect(
@@ -70,7 +71,7 @@ def main():
         logger.info(log_msg)
     cursor.close()
     db.close()
-    
-    
+
+
 if __name__ == '__main__':
     main()
