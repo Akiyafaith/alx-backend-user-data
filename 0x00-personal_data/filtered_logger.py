@@ -2,6 +2,7 @@
 """a function called filter_datum"""
 import logging
 import re
+from typing import List
 
 PII_FIELDS = ("name", "email", "ssn", "phone", "address")
 
