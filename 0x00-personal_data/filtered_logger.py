@@ -27,6 +27,7 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
+        """filter incoming log records"""
         if self.fields:
             for field in self.fields:
                 record.msg = re.sub(f'{field}=.+?;',
