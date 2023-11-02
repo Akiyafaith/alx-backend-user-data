@@ -47,6 +47,28 @@ def get_logger() -> logging.Logger:
     logger.addHandler(stream_handler)
     return logger
 
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """returns a connector to the database"""
+    connector = mysql.connector.connect(
+        user=os.environ.get('PERSONAL_DATA_DB_USERNAME', 'root'),
+        password=os.environ.get('PERSONAL_DATA_DB_PASSWORD', ''),
+        host=os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost'),
+        database=os.environ.get('PERSONAL_DATA_DB_NAME'))
+    return connector
 
+
+def main():
+    """reads and filters data"""
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM users;")
+    logger = get_logger()
+    for row in cursor:
+        log_msg = ' '.join([f"{key}={row[key]}" for key in row])
+        logger.info(log_msg)
+    cursor.close()
+    db.close()
+    
+    
 if __name__ == '__main__':
     main()
