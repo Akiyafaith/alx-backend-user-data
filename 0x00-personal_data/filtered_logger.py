@@ -17,11 +17,13 @@ class RedactingFormatter(logging.Formatter):
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
 
     def __init__(self, fields=None):
+        """initialize a class"""
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
         if self.fields:
             for field in self.fields:
-                record.msg = re.sub(f'{field}=.+?;', f'{field}={self.REDACTION};', record.msg)
+                record.msg = re.sub(f'{field}=.+?;', f'{field}={self.REDACTION};',
+                                    record.msg)
         return super(RedactingFormatter, self).format(record)
