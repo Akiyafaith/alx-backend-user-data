@@ -4,6 +4,8 @@ import logging
 import re
 
 
+PII_FIELDS = ("name", "email", "ssn", "phone", "address")
+
 def filter_datum(fields: list[str], redaction: str,
                  message: str, separator: str) -> str:
     """returns the log message obfuscated"""
@@ -43,3 +45,6 @@ def get_logger() -> logging.Logger:
     stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
     return logger
+
+if __name__ == '__main__':
+    main()
