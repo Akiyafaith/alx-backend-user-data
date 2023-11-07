@@ -11,6 +11,7 @@ unauthorized = Blueprint("unauthorized", __name__)
 
 @unauthorized.route("/api/v1/unauthorized", methods=["GET"])
 def raise_unauthorized():
+    """GET /api/v1/unauthorized"""
     abort(401)
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
