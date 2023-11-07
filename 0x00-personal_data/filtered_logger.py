@@ -5,12 +5,11 @@ import re
 from typing import List
 import os
 import mysql.connector
-import typing
 
 PII_FIELDS = ("name", "email", "ssn", "phone", "address")
 
 
-def filter_datum(fields: typing.List[str], redaction: str,
+def filter_datum(fields: List[str], redaction: str,
                  message: str, separator: str) -> str:
     """returns the log message obfuscated"""
     regex = f'({separator}|^)({"|".join(fields)}=.+?)(?={separator}|$)'
